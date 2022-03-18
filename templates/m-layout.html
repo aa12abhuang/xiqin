@@ -1,6 +1,5 @@
 {% load static %}
 
-{% load static %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -27,6 +26,7 @@
 {#    bootstrap#}
     <link rel="stylesheet" href="{% static 'css/css/bootstrap.css' %}">
 
+    {% block css %}{% endblock %}
 </head>
 
 <body id="page-top">
@@ -101,7 +101,6 @@
                         <!-- 修改对应的html -->
                         <a class="collapse-item" href="/depart/list/">科室总览</a>
                         <a class="collapse-item" href="/depart/add/">新增科室信息</a>
-                        <a class="collapse-item" href="cards.html">编辑科室信息</a>
                     </div>
                 </div>
             </li>
@@ -276,15 +275,15 @@
             </div>
             <!-- End of Main Content -->
 
-            <!-- Footer -->
+            <!-- 底栏显示 -->
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Your Website 2021</span>
+                        <span>Copyright &copy; xiqin 2022</span>
                     </div>
                 </div>
             </footer>
-            <!-- End of Footer -->
+            <!-- 结束底栏 -->
 
         </div>
         <!-- End of Content Wrapper -->
@@ -292,7 +291,7 @@
     </div>
     <!-- End of Page Wrapper -->
 
-    <!-- Scroll to Top Button-->
+    <!-- 滑动到顶端的按钮 -->
     <a class="scroll-to-top rounded" href="#page-top">
         <i class="fas fa-angle-up"></i>
     </a>
@@ -316,6 +315,10 @@
             </div>
         </div>
     </div>
+
+
+
+    {% block js %}{% endblock %}
 
     <!-- Bootstrap core JavaScript-->
     <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>

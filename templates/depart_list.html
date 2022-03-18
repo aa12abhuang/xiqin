@@ -2,39 +2,38 @@
 
 
 {% block search %}
-        <form
-        class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-        <div class="input-group">
-            <!-- 输入框 -->
-            <input type="text" class="form-control bg-light border-0 small" placeholder="查询信息1"
-                aria-label="Search" aria-describedby="basic-addon2">
-            <!-- 按钮 -->
-            <div class="input-group-append">
-                <button class="btn btn-primary" type="button">
-                    <i class="fas fa-search fa-sm"></i>
-                </button>
+    <div>
+        <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search" method="get">
+            <div class="input-group">
+                <!-- 输入框 -->
+                <input  autocomplete=off type="text" name="Search_keshi" class="form-control bg-light border-0 small" placeholder="科室查询"
+                    aria-label="Search" aria-describedby="basic-addon2" value="{{ search_data }}">
+                <!-- 按钮 -->
+                <div class="input-group-append">
+                    <button class="btn btn-primary" type="submit">
+                        <i class="fas fa-search fa-sm"></i>
+                    </button>
+                </div>
             </div>
-        </div>
-    </form>
+        </form>
+    </div>
 {% endblock %}
 
 {% block content %}
         <section class="p-5 bg-primary">
             <div class="container">
-                <h2 class="text-center text-light">部门介绍</h2>
+                <h2 class="text-center text-light">科室总览</h2>
                 <p class="lead text-center text-white mb-5">
-                    Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                    Hic, unde?
+                    健康所系，性命相托
                 </p>
                 <div class="row g-4">
                     {% for obj in queryset %}
                         <div class="col-md-6 col-lg-3">
                             <div class="card bg-light">
                                 <div class="card-body text-center">
-                                    <img src="/media/{{ obj.img }}" class="mb-3 rounded-circle" style="height: 80px"/>
+                                    <img src="/media/{{ obj.img }}" class="mb-3 rounded-circle" style="height:80px;width:70%"/>
                                     <h3 class="card-title">{{ obj.name }}</h3>
-{#                                     style="height:210px;white-space:pre-wrap;overflow: hidden;text-overflow: ellipsis;"#}
-                                    <div class="card-text text-left" style="height:210px;white-space:pre-wrap;overflow: hidden;">
+                                    <div class="card-text text-left" style="text-indent:2em;height:240px;width:100%;overflow: hidden;text-align:left">
                                         {{ obj.profile }}
                                     </div>
                                     <h1> </h1>

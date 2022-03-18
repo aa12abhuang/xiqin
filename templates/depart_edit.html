@@ -1,18 +1,20 @@
 {% extends "m-layout.html" %}
 
+
 {% block content %}
     <div class="container">
         <div class="panel panel-default">
           <div class="panel-heading">
-            <h3 class="panel-title">编辑部门</h3>
+            <h3 class="panel-title">编辑科室</h3>
           </div>
           <div class="panel-body">
             <form method="post">
                 {% csrf_token %}
                <div class="form-group">
-                <label>标题</label>
+                   <div class="form-conctrol" style="margin:10px 0px;">部门</div>
                     <input type="text" class="form-control" placeholder="标题" name="name" value="{{ row_object.name }}" />
-                    <input type="textarea" class="form-control" placeholder="标题" name="profile" value="{{ row_object.profile }}" />
+                    <div class="form-conctrol" style="margin:10px 0px;">详细信息</div>
+                   <textarea name="profile" rows="10" class="form-control" required="required" id="value1"></textarea>
               </div>
 
               <button type="submit" class="btn btn-primary">提 交</button>
@@ -20,4 +22,10 @@
           </div>
         </div>
     </div>
+{% endblock %}
+
+{% block js %}
+    <script>
+        document.getElementById("value1").value="{{ row_object.profile }}"
+    </script>
 {% endblock %}

@@ -9,8 +9,15 @@ from app01 import models
 
 def list(request):
     """部门列表"""
-    queryset = models.Department.objects.all()
-    return render(request, 'depart_list.html', {"queryset": queryset})
+    data_dict = {}
+    # 没有值则填入默认值""
+    search_data = request.GET.get('Search_keshi', "")
+    if search_data:
+        data_dict["profile__contains"] = search_data
+
+    queryset = models.Department.objects.filter(**data_dict)
+
+    return render(request, 'depart_list.html', {"search_data":search_data,"queryset": queryset})
 
 
 class UpModelForm(BootStrapModelForm):
