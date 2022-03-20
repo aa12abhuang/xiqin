@@ -41,7 +41,10 @@
                     <div class="card-body p-0">
                         <!-- Nested Row within Card Body -->
                         <div class="row">
-                        <div class="col-lg-6 d-none d-lg-block bg-login-image"></div>
+                            <div class="col-lg-6 d-none d-lg-block">
+                                <img src="{% static 'img/医院.png' %}" style="margin-top:100px;width:500px"/>
+{#                                <div style="width:50%;height:100%;"><object data="{% static 'img/医院.svg' %}" type="image/svg+xml"></object></div>#}
+                            </div>
                             <div class="col-lg-6">
                                 <div class="p-5">
                                     <div class="text-center">
@@ -49,7 +52,7 @@
                                     </div>
 
 
-                                    <form method="post" novalidate>
+                                    <form method="post" class="user" novalidate>
                                         {% csrf_token %}
                                         <div class="form-group">
                                             <label>用户名</label>
@@ -62,20 +65,19 @@
                                             <span style="color: red;">{{ form.password.errors.0 }}</span>
                                         </div>
 
-                                        <input type="submit" value="登 录" class="btn btn-primary btn-user btn-block">
+                                        <input type="submit" value="管 理 员 登 录" class="btn btn-primary btn-user btn-block">
 
                                          <hr>
                                         <a href="index.html" class="btn btn-google btn-user btn-block">
-                                            <i class="fab fa-google fa-fw"></i> 医生登录
+                                            医 生 登 录
                                         </a>
                                         <a href="index.html" class="btn btn-facebook btn-user btn-block">
-                                            <i class="fab fa-facebook-f fa-fw"></i> 患者登录
+                                            患 者 登 录
                                         </a>
                                     </form>
                                 </div>
                             </div>
                         </div>
-                    </div>
                     </div>
                 </div>
 
