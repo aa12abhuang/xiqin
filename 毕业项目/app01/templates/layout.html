@@ -14,14 +14,12 @@
 
     <title>管理员面板</title>
     <link href="{% static 'model/vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet" type="text/css">
-    <link
-        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-        rel="stylesheet">
-
-    {#    bootstrap#}
-    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+{#    <link href="{% static 'style.css' %}" rel="stylesheet">#}
         <!-- 主模板-->
     <link href="{% static 'model/css/sb-admin-2.min.css' %}" rel="stylesheet">
+    {#    bootstrap#}
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
     {% block css %}{% endblock %}
 </head>
 
@@ -74,10 +72,9 @@
 
 
                         <!-- 修改对应的html -->
-                        <a class="collapse-item" href="buttons.html">医生总览</a>
-                        <a class="collapse-item" href="buttons.html">新增医生信息</a>
-                        <a class="collapse-item" href="cards.html">删除医生信息</a>
-                        <a class="collapse-item" href="cards.html">编辑医生信息</a>
+                        <a class="collapse-item" href="/doctor/list/">医生总览</a>
+                        <a class="collapse-item" href="/doctor/add/">新增医生信息</a>
+                        <a class="collapse-item" href="/doctor/addmore/">批量上传医生信息</a>
                     </div>
                 </div>
             </li>
@@ -97,6 +94,7 @@
                         <!-- 修改对应的html -->
                         <a class="collapse-item" href="/depart/list/">科室总览</a>
                         <a class="collapse-item" href="/depart/add/">新增科室信息</a>
+
                     </div>
                 </div>
             </li>
@@ -105,7 +103,7 @@
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
                     aria-expanded="true" aria-controls="collapseUtilities">
-                    <i class="fas fa-fw fa-wrench"></i>
+                    <i class="fas fa-fw fa-cog"></i>
                     <span>药物管理</span>
                 </a>
                 <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
@@ -138,14 +136,14 @@
             <!-- 药品信息统计 -->
             <li class="nav-item">
                 <a class="nav-link" href="tables.html">
-                    <i class="fas fa-fw fa-table"></i>
+                    <i class="fas fa-fw fa-chart-area"></i>
                     <span>药品信息</span></a>
             </li>
 
             <!-- 医生信息统计 -->
             <li class="nav-item">
                 <a class="nav-link" href="tables.html">
-                    <i class="fas fa-fw fa-table"></i>
+                    <i class="fas fa-fw fa-chart-area"></i>
                     <span>医生信息</span></a>
             </li>
 
@@ -287,7 +285,7 @@
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">你确定要退出登录吗？</h5>
+            <h5 class="modal-title" id="exampleModalLabel">是否确定退出登录？</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>

@@ -10,3 +10,17 @@ class DepartmentModelForm(BootStrapModelForm):
         model = models.Department
         fields = "__all__"
         # exclude['level'] 排除某些字段
+
+
+class DoctorModelForm(forms.ModelForm):
+    class Meta:
+        model = models.Doctor
+        fields = ["name", "gender", "depart", "level", "salary", "day"]
+
+    # 设置格式
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        # 遍历设置格式
+        for name, field in self.fields.items():
+            field.widget.attrs = {"class": "form-control", "placeholder": field.label}

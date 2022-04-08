@@ -1,5 +1,5 @@
 {% extends "layout.html" %}
-
+{% load static %}
 
 {% block search %}
     <div>
@@ -7,9 +7,8 @@
               method="get">
             <div class="input-group">
                 <!-- 输入框 -->
-                <input autocomplete=off type="text" name="Search_depart" class="form-control bg-light border-0 small"
-                       placeholder="科室查询"
-                       aria-label="Search" aria-describedby="basic-addon2" value="{{ search_data }}">
+                <input autocomplete=off type="text" name="Search_doctor" class="form-control bg-light border-0 small"
+                       placeholder="医生查询" aria-label="Search" aria-describedby="basic-addon2" value="{{ search_data }}">
                 <!-- 按钮 -->
                 <div class="input-group-append">
                     <button class="btn btn-primary" type="submit">
@@ -22,40 +21,54 @@
 {% endblock %}
 
 {% block content %}
-    <section class="p-5 bg-primary">
-        <div class="container">
-            <h2 class="text-center text-light">科室总览</h2>
-            <p class="lead text-center text-white mb-5">
-                健康所系，性命相托
-            </p>
-            <div class="row g-4">
-                {% for obj in queryset %}
-                    <div class="col-md-6 col-lg-3">
-                        <div class="card bg-light" style="margin-top:20px">
-                            <div class="card-body text-center">
-                                <img src="/media/{{ obj.img }}" class="mb-3 card-img-top"
-                                     style="height:80px;width:70%"/>
-                                <div class="card-body">
-                                    <h3 class="card-title">{{ obj.name }}</h3>
-                                    <div class="card-text text-left"
-                                         style="text-indent:2em;height:240px;width:100%;overflow: hidden;text-align:left">
-                                        {{ obj.profile }}
-                                    </div>
-                                    <h1></h1>
-                                    <a class="btn btn-primary btn-xs" href="/depart/{{ obj.id }}/edit/">编辑</a>
-                                    <input uid="{{ obj.id }}" class="btn btn-danger btn-xs btn-delete" type="button"
-                                           value="删除">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                {% endfor %}
-            </div>
+
+    <div class="container">
+        <div class="panel panel-default">
+{#          <!-- 表头 -->#}
+{#          <div class="panel-heading">#}
+{#              <h2 class="text-center text-light">医生总览</h2>#}
+{#          </div>#}
+          <!-- 表格 -->
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                  <th>姓名</th>
+                  <th>性别</th>
+                  <th>所属部门</th>
+                  <th>等级</th>
+                  <th>工资</th>
+                  <th>出诊时间</th>
+                  <th>操作</th>
+              </tr>
+            </thead>
+            <tbody>
+            {% for obj in queryset %}
+              <tr>
+                  <td>{{ obj.name }}</td>
+                  <td>{{ obj.get_gender_display }}</td>
+                  <td>{{ obj.depart.name }}</td>
+                  <td>{{ obj.get_level_display }}</td>
+{#                  模板语法不允许加括号，会自动帮忙加括号的#}
+                  <td>{{ obj.salary }}</td>
+                  <td>{{ obj.day }}</td>
+                <td>
+{#                    两种传递ID的方法#}
+                    <a class="btn btn-primary btn-xs" href="/doctor/{{ obj.id }}/edit/">编辑</a>
+                    <input uid="{{ obj.id }}" class="btn btn-danger btn-xs btn-delete" type="button" value="删除">
+                </td>
+              </tr>
+            {% endfor %}
+            </tbody>
+          </table>
         </div>
-    </section>
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+                {{ page_string }}
+            </ul>
+        </nav>
+    </div>
 
-
-    {#    删除对话框#}
+                {#    删除对话框#}
     <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -66,7 +79,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    删除后，所有关联的相对数据都会被删除。请确认科室所属的医生已经全部转移到其他科室。
+                    删除后，所有关联的相对数据都会被删除。
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
@@ -76,8 +89,9 @@
         </div>
     </div>
 
-
 {% endblock %}
+
+
 
 {% block js %}
     <script type="text/javascript">
@@ -98,7 +112,7 @@
         function bindBtnConfirmDelete() {
             $("#btnConfirmDelete").click(function () {
                 $.ajax({
-                    url: "/depart/delete/",
+                    url: "/doctor/delete/",
                     type: "GET",
                     data: {
                         uid: DELETE_ID,
@@ -116,6 +130,3 @@
     </script>
 
 {% endblock %}
-
-
-

@@ -1,4 +1,4 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
 from django import forms
@@ -7,6 +7,7 @@ from django import forms
 from app01.utils.bootstrap import BootStrapForm
 from app01.utils.encrypt import md5
 from app01 import models
+
 
 def index(request):
     return render(request, 'index.html')
@@ -47,6 +48,7 @@ def login(request):
 
     return render(request, 'login.html', {"form": form})
 
+
 def logout(request):
     """注销"""
     request.session.clear()
@@ -59,5 +61,4 @@ def edit(request):
     uid = request.POST.get("uid")
     pwd = request.POST.get("pwd")
     models.Admin.objects.filter(id=uid).update(password=md5(pwd))
-    print(uid,pwd,md5(pwd))
     return JsonResponse({"status": True})
