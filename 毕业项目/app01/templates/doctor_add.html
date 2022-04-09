@@ -5,9 +5,30 @@
 {% block content %}
     <div class="container">
         <div class="panel panel-default">
-          <div class="panel-heading">
-            <h3 class="panel-title">新建医生</h3>
-          </div>
+            <!-- Default panel contents -->
+            <div class="alert alert-primary" role="alert">
+              批量上传医生信息
+            </div>
+            <p class="lead text-center text-black-50 mb-5">
+                请上传Excel文件，并按照指定顺序填写Excel文件中的信息。
+            </p>
+            <div class="panel-body">
+                <form method="post" enctype="multipart/form-data" action="/doctor/excel/">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <input type="file" name="exc">
+                    </div>
+                    <input type="submit" value="上传" class="brn btn-primary">
+                </form>
+            </div>
+        </div>
+
+        <hr>
+
+        <div class="panel panel-default">
+          <div class="alert alert-primary" role="alert">
+              新建医生
+            </div>
           <div class="panel-body">
             <form method="post" novalidate>
                 {% csrf_token %}

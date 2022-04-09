@@ -8,12 +8,18 @@ from openpyxl import load_workbook
 
 def list(request):
     """医生列表"""
-    queryset = models.Doctor.objects.all()
-    page_object = Pagination(request, queryset, page_size=2)
-    context = {
-        "queryset": page_object.page_queryset,
-        "page_string": page_object.html(),
-    }
+    data_dict = {}
+    # 没有值则填入默认值""
+    search_data = request.GET.get('Search_doctor', "")
+    if search_data:
+        data_dict["name__contains"] = search_data
+    # select * from 表 order by level asc
+
+    queryset = models.Doctor.objects.filter(**data_dict).order_by("level").order_by("depart")
+
+    page_object = Pagination(request, queryset, page_size=15)
+
+    context = {"search_data": search_data, "queryset": page_object.page_queryset, "page_string": page_object.html()}
     return render(request, "doctor_list.html", context)
 
 
@@ -30,12 +36,29 @@ def add(request):
     return render(request, "doctor_add.html", {"form": form})
 
 
-def addmore(request):
-    return render(request, 'doctor_addmore.html')
-
-
 def excel(request):
     """批量上传（EXCEl文件),仅适用与xlxs文件"""
+    # 1.获取用户上传的文件对象
+    file_object = request.FILES.get("exc")
+    # 2.对象传递给openpyxl，由openpyxl读取文件的内容
+    wb = load_workbook(file_object)
+    sheet = wb.worksheets[0]
+
+    for row in sheet.iter_rows(min_row=2):
+        name = row[0].value
+        exists = models.Doctor.objects.filter(name=name).exists()
+        gender = row[1].value
+        depart = row[2].value
+        level = row[3].value
+        salary = row[4].value
+        day = row[5].value
+        # 判断姓名是否存在，不存在则新增，存在则更新
+        if not exists:
+            models.Doctor.objects.create(name=name, gender=gender, depart_id=depart, level=level, salary=salary,
+                                         day=day)
+        else:
+            models.Doctor.objects.filter(name=name).update(name=name, gender=gender, depart_id=depart, level=level,
+                                                           salary=salary,day=day)
     return redirect("/doctor/list/")
 
 
