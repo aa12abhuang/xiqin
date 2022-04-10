@@ -1,11 +1,7 @@
-import os
 from django.http import JsonResponse
-from django.shortcuts import render, HttpResponse, redirect
-from django import forms
-# from django.views.decorators.csrf import csrf_exempt
-from django.conf import settings
+from django.shortcuts import render, redirect
 
-from app01.utils.bootstrap import BootStrapForm, BootStrapModelForm
+from app01.utils.bootstrap import BootStrapModelForm
 from app01 import models
 
 

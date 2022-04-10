@@ -34,3 +34,14 @@ class Doctor(models.Model):
     level = models.SmallIntegerField(verbose_name='等级', choices=level_choices)
     salary = models.IntegerField(verbose_name='工资')
     day = models.CharField(verbose_name='工作时间', max_length=32)
+
+
+class Medicine(models.Model):
+    """药物表"""
+    name = models.CharField(verbose_name='药品名称', max_length=32)
+    scale = models.CharField(verbose_name="规格", max_length=32)
+    unit_choice = ((0, 'Kg'), (1, '包'), (2, '袋'), (3, '盒'), (4, '瓶'), (5, '支'))
+    unit = models.SmallIntegerField(verbose_name='单位', choices=unit_choice)
+    price = models.IntegerField(verbose_name='单价')
+    category_choice = ((0, '胶囊剂'), (1, '颗粒剂'), (2, '片剂'), (3, '饮片'), (4, '针剂'), (5, '注射剂'), (6, '其他'))
+    category = models.SmallIntegerField(verbose_name='类别', choices=category_choice)

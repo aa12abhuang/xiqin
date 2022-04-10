@@ -7,8 +7,8 @@
               method="get">
             <div class="input-group">
                 <!-- 输入框 -->
-                <input autocomplete=off type="text" name="Search_doctor" class="form-control bg-light border-0 small"
-                       placeholder="医生查询" aria-label="Search" aria-describedby="basic-addon2" value="{{ search_data }}">
+                <input autocomplete=off type="text" name="Search_medicine" class="form-control bg-light border-0 small"
+                       placeholder="药物查询" aria-label="Search" aria-describedby="basic-addon2" value="{{ search_data }}">
                 <!-- 按钮 -->
                 <div class="input-group-append">
                     <button class="btn btn-primary" type="submit">
@@ -24,20 +24,14 @@
 
     <div class="container">
         <div class="panel panel-default">
-{#          <!-- 表头 -->#}
-{#          <div class="panel-heading">#}
-{#              <h2 class="text-center text-light">医生总览</h2>#}
-{#          </div>#}
-          <!-- 表格 -->
           <table class="table table-bordered">
             <thead>
               <tr>
-                  <th>姓名</th>
-                  <th>性别</th>
-                  <th>所属部门</th>
-                  <th>等级</th>
-                  <th>工资</th>
-                  <th>出诊时间</th>
+                  <th>药品名称</th>
+                  <th>规格</th>
+                  <th>单位</th>
+                  <th>价格</th>
+                  <th>类别</th>
                   <th>操作</th>
               </tr>
             </thead>
@@ -45,15 +39,13 @@
             {% for obj in queryset %}
               <tr>
                   <td>{{ obj.name }}</td>
-                  <td>{{ obj.get_gender_display }}</td>
-                  <td>{{ obj.depart.name }}</td>
-                  <td>{{ obj.get_level_display }}</td>
-{#                  模板语法不允许加括号，会自动帮忙加括号的#}
-                  <td>{{ obj.salary }}</td>
-                  <td>{{ obj.day }}</td>
+                  <td>{{ obj.scale }}</td>
+                  <td>{{ obj.get_unit_display }}</td>
+                  <td>{{ obj.price }}</td>
+                  <td>{{ obj.get_category_display }}</td>
                 <td>
 {#                    两种传递ID的方法#}
-                    <a class="btn btn-primary btn-xs" href="/doctor/{{ obj.id }}/edit/">编辑</a>
+                    <a class="btn btn-primary btn-xs" href="/medicine/{{ obj.id }}/edit/">编辑</a>
                     <input uid="{{ obj.id }}" class="btn btn-danger btn-xs btn-delete" type="button" value="删除">
                 </td>
               </tr>
@@ -112,7 +104,7 @@
         function bindBtnConfirmDelete() {
             $("#btnConfirmDelete").click(function () {
                 $.ajax({
-                    url: "/doctor/delete/",
+                    url: "/medicine/delete/",
                     type: "GET",
                     data: {
                         uid: DELETE_ID,

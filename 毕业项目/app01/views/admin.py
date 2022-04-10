@@ -2,8 +2,6 @@ from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
 from django import forms
-
-# Create your views here.
 from app01.utils.bootstrap import BootStrapForm
 from app01.utils.encrypt import md5
 from app01 import models

@@ -58,7 +58,7 @@ def excel(request):
                                          day=day)
         else:
             models.Doctor.objects.filter(name=name).update(name=name, gender=gender, depart_id=depart, level=level,
-                                                           salary=salary,day=day)
+                                                           salary=salary, day=day)
     return redirect("/doctor/list/")
 
 

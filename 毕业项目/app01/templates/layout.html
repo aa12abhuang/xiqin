@@ -48,7 +48,7 @@
                 <a class="nav-link" href="/manage/index/">
                     <!-- 图标 -->
                     <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>控制面板</span></a>
+                    <span>首页</span></a>
             </li>
 
             <!-- 分隔符 -->
@@ -58,25 +58,6 @@
             <div class="sidebar-heading">
                 管理页面
             </div>
-
-            <!-- 医生管理页面 -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseOne"
-                    aria-expanded="true" aria-controls="collapseOne">
-                    <i class="fas fa-fw fa-cog"></i>
-                    <span>医生管理</span>
-                </a>
-                <div id="collapseOne" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">编辑事项:</h6>
-
-
-                        <!-- 修改对应的html -->
-                        <a class="collapse-item" href="/doctor/list/">医生总览</a>
-                        <a class="collapse-item" href="/doctor/add/">新增医生信息</a>
-                    </div>
-                </div>
-            </li>
 
             <!-- 科室管理页面 -->
             <li class="nav-item">
@@ -98,6 +79,28 @@
                 </div>
             </li>
 
+
+            <!-- 医生管理页面 -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseOne"
+                    aria-expanded="true" aria-controls="collapseOne">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>医生管理</span>
+                </a>
+                <div id="collapseOne" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">编辑事项:</h6>
+
+
+                        <!-- 修改对应的html -->
+                        <a class="collapse-item" href="/doctor/list/">医生总览</a>
+                        <a class="collapse-item" href="/doctor/add/">新增医生信息</a>
+                    </div>
+                </div>
+            </li>
+
+
+
             <!-- 药物管理 -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
@@ -109,8 +112,8 @@
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">编辑事项:</h6>
-                        <a class="collapse-item" href="utilities-color.html">药物总览</a>
-                        <a class="collapse-item" href="utilities-border.html">新增药物</a>
+                        <a class="collapse-item" href="/medicine/list/">药物总览</a>
+                        <a class="collapse-item" href="/medicine/add/">新增药物</a>
                     </div>
                 </div>
             </li>
