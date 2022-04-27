@@ -53,21 +53,24 @@
 <script>
 	export default {
 		onShow() {
-			wx.cloud.database().collection('group').get()
-				.then(res => {
-					console.log('管理员列表请求成功', res)
-					console.log("res is" + res.data)
-					let temp = res.data;
-					for (let item of temp) {
-						this.picker.push(item.name)
-					}
-
-
-				})
-				.catch(err => {
-					console.log('管理员列表请求失败', err)
-				})
-			console.log("launched")
+			wx.cloud.callFunction({
+				name: 'getData',
+				data: {
+					databaseName: 'group',
+					order: 'name',
+				}
+			}).then(res => {
+				console.log('管理员列表请求成功', res)
+				console.log("res is" + res.data)
+				let temp = res.result.data;
+				let templist = []
+				for (let item of temp) {
+					templist.push(item.name)
+				}
+				this.picker = templist
+			}).catch(err => {
+				console.log('管理员列表请求失败', err)
+			})
 		},
 		data() {
 			return {

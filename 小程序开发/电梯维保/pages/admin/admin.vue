@@ -42,7 +42,7 @@
 							<view class="action">
 								<button class="cu-btn round bg-green shadow" style="background-color: #A5673F;"
 									@click="deletegroup(group.name)">
-									<text class="cuIcon-upload"></text> 删除</button>
+									<text></text> 删除</button>
 							</view>
 						</view>
 						<view class="cu-list menu"
@@ -60,12 +60,12 @@
 								<view class="action">
 									<button class="cu-btn round bg-green shadow" style="background-color: #880000;"
 										@click="clickdelete(item._id)">
-										<text class="cuIcon-upload"></text> 删除</button>
+										<text></text> 删除</button>
 								</view>
 								<view class="action">
 									<button class="cu-btn round bg-green shadow"
 										@click="clickchangeID(item._id,item.account,item.name,item.psw,item.group)">
-										<text class="cuIcon-upload"></text> 编辑</button>
+										<text></text> 编辑</button>
 								</view>
 							</view>
 						</view>
@@ -170,7 +170,8 @@
 									name: 'removeData',
 									data: {
 										databaseName: 'group',
-										name: name
+										name: name,
+										flag: parseInt(1)
 									}
 								})
 								.then(res => {
@@ -223,12 +224,13 @@
 					content: "删除后数据不可恢复，您确定要删除该用户吗？",
 					success(res) {
 						if (res.confirm == true) {
-							console.log('点击确认删除', res)
+							console.log('点击确认删除用户', res)
 							wx.cloud.callFunction({
 								name: 'removeData',
 								data: {
 									databaseName: 'admin',
-									id: id
+									id: id,
+									flag: parseInt(2)
 								}
 							}).then(res => {
 								console.log(res);
