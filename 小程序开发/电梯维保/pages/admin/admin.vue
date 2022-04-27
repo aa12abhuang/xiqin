@@ -8,7 +8,7 @@
 		<view class="box">
 			<view class="cu-bar btn-group">
 				<button class="cu-btn bg-green shadow-blur round" @click="clickcreateID()">新建账号</button>
-				<button class="cu-btn bg-blue shadow-blur round" @click="clickcreateGroup()">新建小组</button>
+				<button class="cu-btn bg-blue shadow-blur round" @click="AddGroup()">新建小组</button>
 			</view>
 		</view>
 		<!--弹窗-->
@@ -156,6 +156,29 @@
 		},
 
 		methods: {
+			//增加分组
+			AddGroup() {
+				wx.showModal({
+					cancelColor: 'cancelColor',
+					title: "新增分组",
+					placeholderText: "请输入新增分组的名称",
+					editable: true,
+					success(res) {
+						if (res.confirm == true) {
+							wx.cloud.database().collection('group').add({
+								data: {
+									name: res.content
+								}
+							})
+						}
+						console.log('新增分组信息', res)
+						uni.reLaunch({
+							url: './admin'
+						})
+					}
+				})
+
+			},
 			//删除分组
 			deletegroup(name) {
 				let that = this
